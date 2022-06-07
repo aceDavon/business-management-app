@@ -1,0 +1,9 @@
+{
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.triggerExpansionOnTab": true,
+  "reactSnippets.settings.prettierEnabled": true
+}
