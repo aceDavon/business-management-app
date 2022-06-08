@@ -40,7 +40,6 @@ const NavIcons = () => {
       dropdown-menu
       min-w-max
       absolute
-      hidden
       bg-white
       text-base
       z-50
@@ -144,7 +143,6 @@ const NavIcons = () => {
     dropdown-menu
     min-w-max
     absolute
-    hidden
     bg-white
     text-base
     z-50

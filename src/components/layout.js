@@ -7,6 +7,7 @@ const Layout = () => {
   const { isLoggedIn, admin } = useSelector(selectAllUsers);
 
   const dashboard = [isLoggedIn, admin].every(Boolean);
+  const topNav = [isLoggedIn, !admin].every(Boolean);
   return (
     <>
       {dashboard && <Navbar />}
