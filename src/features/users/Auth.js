@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getLocal, saveUser, selectAllUsers, signIn } from "./usersSlice";
+import { saveUser, selectAllUsers, signIn } from "./usersSlice";
 
 const Auth = () => {
   const [values, setValues] = useState({});

@@ -5,24 +5,26 @@ import Welcome from "./pages/welcome";
 import { fetchUsers, getLocal, selectAllUsers } from "./features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Landing from "./pages/landing";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const { isLoggedIn } = useSelector(selectAllUsers);
+  const { isLoggedIn, authUser } = useSelector(selectAllUsers);
   const dispatch = useDispatch();
   const local = JSON.parse(localStorage.getItem("appUser"));
+  const [username, setUsername] = useState("");
   useEffect(() => {
     if (!local) {
       dispatch(fetchUsers());
     } else {
       dispatch(getLocal(local));
     }
-  }, [dispatch]);
+    setUsername(authUser.username);
+  }, [dispatch, authUser.username]);
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={isLoggedIn ? <Welcome /> : <Landing />} />
+        <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username]} /> : <Landing />} />
       </Route>
     </Routes>
   );
