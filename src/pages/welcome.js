@@ -48,18 +48,22 @@ const Welcome = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {Issues.map((x) => {
-                        return (
-                          <tr class="bg-gray-100 border-b" key={x.date}>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.title}</td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.description}</td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              <span className="rounded-lg bg-green-400 text-xs text-white p-2">pending</span>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                      {Issues.length > 0 ? (
+                        Issues.map((x) => {
+                          return (
+                            <tr class="bg-gray-100 border-b" key={x.date}>
+                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.title}</td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.description}</td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <span className="rounded-lg bg-green-400 text-xs text-white p-2">pending</span>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <p className="font-semibold text-lg text-center w-full">No Issues added yet, Please add Issues to track here</p>
+                      )}
                     </tbody>
                   </table>
                 </div>
