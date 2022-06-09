@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Bell, Cart, Hamburger } from "../../icons";
+import { Bell, Hamburger } from "../../icons";
 import { useSelector } from "react-redux";
 import { selectAllUsers } from "../../features/users/usersSlice";
 import { useEffect, useState } from "react";
@@ -26,7 +26,7 @@ const Navbar = () => {
           aria-label="Toggle navigation">
           <Hamburger />
         </button>
-        <div className="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse flex-grow items-center">
           <Link to={"/#"} className="flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1">
             <img src={Logo} style={{ height: 15 }} alt="" loading="lazy" />
           </Link>

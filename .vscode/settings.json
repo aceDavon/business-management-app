@@ -6,5 +6,8 @@
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": true,
   "reactSnippets.settings.prettierEnabled": true,
-  "diffEditor.wordWrap": "off"
+  "diffEditor.wordWrap": "off",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false
 }

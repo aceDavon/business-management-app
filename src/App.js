@@ -6,6 +6,7 @@ import { fetchUsers, getLocal, selectAllUsers } from "./features/users/usersSlic
 import { useDispatch, useSelector } from "react-redux";
 import Landing from "./pages/landing";
 import { useEffect, useState } from "react";
+import IssueContainer from "./features/issues/issueContainer";
 
 function App() {
   const { isLoggedIn, authUser } = useSelector(selectAllUsers);
@@ -25,6 +26,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username]} /> : <Landing />} />
+        <Route path="/issues">
+          <Route path="add" element={<IssueContainer {...authUser} />} />
+        </Route>
       </Route>
     </Routes>
   );

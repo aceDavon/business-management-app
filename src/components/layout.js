@@ -12,11 +12,11 @@ const Layout = () => {
     <>
       {dashboard && <Navbar />}
       <div className="w-full flex gap-10 relative">
-        <div className={dashboard ? "w-9/12 ml-auto" : "w-full px-6"}>
+        <div className={dashboard ? "w-9/12 ml-auto" : "w-full px-4"}>
           <Outlet />
+          <Footer />
         </div>
       </div>
-        <Footer />
     </>
   );
 };
