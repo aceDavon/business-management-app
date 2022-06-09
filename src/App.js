@@ -10,7 +10,7 @@ import IssueContainer from "./features/issues/issueContainer";
 import { selectAllIssues } from "./features/issues/issuesSlice";
 
 function App() {
-  const { isLoggedIn, authUser } = useSelector(selectAllUsers);
+  const { isLoggedIn, authUser, admin } = useSelector(selectAllUsers);
   const { issues } = useSelector(selectAllIssues);
   const dispatch = useDispatch();
   const local = JSON.parse(localStorage.getItem("appUser"));
@@ -27,9 +27,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username]} issues={issues} /> : <Landing />} />
+        <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username, admin]} issues={issues} /> : <Landing />} />
         <Route path="/issues">
-          <Route path="add" element={<IssueContainer {...authUser} />} />
+          <Route path="add" element={<IssueContainer user={[authUser, admin]} />} />
         </Route>
       </Route>
     </Routes>

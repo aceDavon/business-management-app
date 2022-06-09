@@ -5,7 +5,7 @@ import { selectAllUsers } from "../../features/users/usersSlice";
 import { useEffect, useState } from "react";
 import Logo from "../../img/logo.png";
 
-const Navbar = () => {
+const AuthNavbar = () => {
   const { authUser, isLoggedIn } = useSelector(selectAllUsers);
   const [username, setusername] = useState("");
 
@@ -124,4 +124,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AuthNavbar;

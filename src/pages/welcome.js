@@ -1,13 +1,16 @@
+import { useDispatch } from "react-redux";
 import Navbar from "../components/authUsers/navbar";
 import AuthSideBar from "../components/authUsers/sideBar";
+import { removeIssue, resolveIssue } from "../features/issues/issuesSlice";
 
 const Welcome = (props) => {
-  const [isLoggedIn, username] = props.user;
+  const [isLoggedIn, username, admin] = props.user;
   const Issues = props.issues;
+  const dispatch = useDispatch();
 
   return (
     <div className="container h-screen relative bottom-4">
-      <Navbar />
+      {!admin && <Navbar />}
       <div className="flex w-full h-screen gap-4">
         <AuthSideBar />
         <div className="w-full mx-auto p-4">
@@ -50,13 +53,37 @@ const Welcome = (props) => {
                     <tbody>
                       {Issues.length > 0 ? (
                         Issues.map((x) => {
+                          let sn = 0;
                           return (
                             <tr class="bg-gray-100 border-b" key={x.date}>
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.title}</td>
+                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{(sn += 1)}</td>
+                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                {x.title}
+                                {admin ? (
+                                  <div className="w-60 flex gap-4 py-4">
+                                    <button
+                                      className="btn-link px-2 bg-green-500 text-xs rounded-xl text-white hover:brightness-125"
+                                      onClick={() => dispatch(resolveIssue(x.id))}>
+                                      resolve
+                                    </button>
+                                    <button
+                                      className="btn-link px-2 bg-yellow-500 text-xs rounded-xl text-white hover:brightness-125"
+                                      onClick={() => dispatch(removeIssue(x.id))}>
+                                      remove
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <div className="w-60 flex gap-4 py-4">
+                                    <button className="btn-link px-2 bg-green-500 text-xs rounded-xl text-white hover:brightness-125">Request Review</button>
+                                  </div>
+                                )}
+                              </td>
                               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.description}</td>
                               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <span className="rounded-lg bg-green-400 text-xs text-white p-2">pending</span>
+                                <span
+                                  className={x.resolved ? "rounded-lg bg-green-400 text-xs text-white p-2" : "rounded-lg bg-red-400 text-xs text-white p-2"}>
+                                  {admin ? (x.resolved ? "resolved" : "unresolved") : "pending"}
+                                </span>
                               </td>
                             </tr>
                           );

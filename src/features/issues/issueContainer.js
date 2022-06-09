@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/authUsers/navbar";
 import { addIssue } from "./issuesSlice";
 
-const IssueContainer = ({ authUser, isLoggedIn }) => {
+const IssueContainer = (props) => {
   const [values, setValues] = useState({});
   const dispatch = useDispatch();
   const [err, setErr] = useState(false);
+  const [authUser, admin] = props.user;
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -22,7 +23,7 @@ const IssueContainer = ({ authUser, isLoggedIn }) => {
   };
   return (
     <>
-      <Navbar />
+      {!admin && <Navbar />}
       <div className="block p-6 mx-auto my-4 rounded-lg shadow-lg bg-white max-w-md">
         <p className="text-3xl font-bold text-center">Add issues to the system below</p>
         <form className="my-2">
