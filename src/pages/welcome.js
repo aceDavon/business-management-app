@@ -3,6 +3,7 @@ import AuthSideBar from "../components/authUsers/sideBar";
 
 const Welcome = (props) => {
   const [isLoggedIn, username] = props.user;
+  const Issues = props.issues;
 
   return (
     <div className="container h-screen relative bottom-4">
@@ -13,7 +14,7 @@ const Welcome = (props) => {
           <p className="font-bold text-7xl capitalize">Welcome {isLoggedIn ? username : ""}</p>
           <div className="w-full flex flex-wrap justify-center md:justify-end gap-4 py-4">
             <div className="rounded-lg w-48 lg:w-60 bg-green-300 shadow-md shadow-gray-400 py-10">
-              <p className="text-lg font-semibold text-white text-center">Total Issues</p>
+              <p className="text-lg font-semibold text-white text-center">Tasks Assigned</p>
               <p className="text-sm font-light text-white text-center">324</p>
             </div>
             <div className="rounded-lg w-48 lg:w-60 bg-blue-300 shadow-md shadow-gray-400 py-10">
@@ -21,7 +22,7 @@ const Welcome = (props) => {
               <p className="text-sm font-light text-white text-center">324</p>
             </div>
             <div className="rounded-lg w-48 lg:w-60 bg-orange-300 shadow-md shadow-gray-400 py-10">
-              <p className="text-lg font-semibold text-white text-center">Total Issues</p>
+              <p className="text-lg font-semibold text-white text-center">Resolved Issues</p>
               <p className="text-sm font-light text-white text-center">324</p>
             </div>
           </div>
@@ -36,35 +37,29 @@ const Welcome = (props) => {
                           #
                         </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          First
+                          Title
                         </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          Last
+                          Description
                         </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          Handle
+                          Status
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="bg-gray-100 border-b">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Mark</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Otto</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">@mdo</td>
-                      </tr>
-                      <tr class="bg-white border-b">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Jacob</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Thornton</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">@fat</td>
-                      </tr>
-                      <tr class="bg-gray-100 border-b">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Thornton</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">Thornton</td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">@twitter</td>
-                      </tr>
+                      {Issues.map((x) => {
+                        return (
+                          <tr class="bg-gray-100 border-b" key={x.date}>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.title}</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{x.description}</td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              <span className="rounded-lg bg-green-400 text-xs text-white p-2">pending</span>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

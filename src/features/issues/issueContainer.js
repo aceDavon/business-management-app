@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/authUsers/navbar";
 import { addIssue } from "./issuesSlice";
 
@@ -97,6 +98,7 @@ const IssueContainer = ({ authUser, isLoggedIn }) => {
             Submit
           </button>
         </form>
+        <Link to={"../../"}>Home</Link>
       </div>
     </>
   );

@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Landing from "./pages/landing";
 import { useEffect, useState } from "react";
 import IssueContainer from "./features/issues/issueContainer";
+import { selectAllIssues } from "./features/issues/issuesSlice";
 
 function App() {
   const { isLoggedIn, authUser } = useSelector(selectAllUsers);
+  const { issues } = useSelector(selectAllIssues);
   const dispatch = useDispatch();
   const local = JSON.parse(localStorage.getItem("appUser"));
   const [username, setUsername] = useState("");
@@ -25,7 +27,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username]} /> : <Landing />} />
+        <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username]} issues={issues} /> : <Landing />} />
         <Route path="/issues">
           <Route path="add" element={<IssueContainer {...authUser} />} />
         </Route>

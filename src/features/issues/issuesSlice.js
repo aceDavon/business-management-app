@@ -21,5 +21,6 @@ const IssuesSlice = createSlice({
 });
 
 export const { addIssue } = IssuesSlice.actions;
+export const selectAllIssues = (state) => state.issues;
 
 export default IssuesSlice.reducer;
