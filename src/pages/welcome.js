@@ -5,7 +5,7 @@ const Welcome = (props) => {
   const [isLoggedIn, username] = props.user;
 
   return (
-    <div className="container h-screen">
+    <div className="container h-screen relative bottom-4">
       <Navbar />
       <div className="flex w-full h-screen gap-4">
         <SideBar />
