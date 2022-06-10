@@ -7,7 +7,7 @@ const initialState = {
   authUser: {},
   local: false,
   isLoggedIn: false,
-  admin: false,
+  admin: true,
   status: "idle",
   error: "",
 };

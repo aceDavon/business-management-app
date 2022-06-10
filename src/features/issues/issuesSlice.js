@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sub } from "date-fns/esm";
 
 let initialId = 0;
 const initialState = {
@@ -11,14 +10,24 @@ const IssuesSlice = createSlice({
   name: "Issues",
   initialState,
   reducers: {
-    addIssue: (state, action) => {
-      let arr = action.payload;
-      let min = 1;
-      arr.date = sub(new Date(), { minutes: min++ }).toISOString();
-      arr.id = ++initialId;
-      arr.resolved = false;
+    addIssue: {
+      reducer: (state, action) => {
+        let arr = action.payload;
+        arr.id = ++initialId;
+        arr.resolved = false;
 
-      state.issues = state.issues.concat(arr);
+        state.issues = state.issues.concat(arr);
+      },
+      prepare(title, description, username) {
+        return {
+          payload: {
+            title,
+            description,
+            username,
+            date: new Date().toISOString(),
+          },
+        };
+      },
     },
     resolveIssue: (state, action) => {
       const issue = state.issues.find((resolved) => resolved.id === action.payload);

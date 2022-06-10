@@ -8,6 +8,7 @@ import Landing from "./pages/landing";
 import { useEffect, useState } from "react";
 import IssueContainer from "./features/issues/issueContainer";
 import { selectAllIssues } from "./features/issues/issuesSlice";
+import TasksContainer from "./features/tasks/tasksContainer";
 
 function App() {
   const { isLoggedIn, authUser, admin } = useSelector(selectAllUsers);
@@ -30,6 +31,9 @@ function App() {
         <Route index element={isLoggedIn ? <Welcome user={[isLoggedIn, username, admin]} issues={issues} /> : <Landing />} />
         <Route path="/issues">
           <Route path="add" element={<IssueContainer user={[authUser, admin]} />} />
+        </Route>
+        <Route path="/tasks">
+          <Route path="add" element={<TasksContainer user={[authUser, admin]} />} />
         </Route>
       </Route>
     </Routes>

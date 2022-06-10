@@ -75,7 +75,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Install redux core library
 
-### 'npm i redux
+### npm i redux
 
 install the latest version of redux core library to manage app state seperately from the react app
-

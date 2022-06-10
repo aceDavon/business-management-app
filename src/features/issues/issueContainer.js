@@ -15,11 +15,12 @@ const IssueContainer = (props) => {
   };
 
   const { title, description } = values;
+  const username = authUser.username;
 
   const canSave = [title, description].every(Boolean);
 
   const handleClick = () => {
-    canSave ? dispatch(addIssue(values)) : setErr(!err);
+    canSave ? dispatch(addIssue(title, description, username)) : setErr(!err);
   };
   return (
     <>

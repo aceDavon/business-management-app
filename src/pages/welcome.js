@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import Navbar from "../components/authUsers/navbar";
 import AuthSideBar from "../components/authUsers/sideBar";
+import TimeAgo from "../components/timeAgo";
 import { removeIssue, resolveIssue } from "../features/issues/issuesSlice";
 
 const Welcome = (props) => {
@@ -60,21 +61,28 @@ const Welcome = (props) => {
                               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 {x.title}
                                 {admin ? (
-                                  <div className="w-60 flex gap-4 py-4">
-                                    <button
-                                      className="btn-link px-2 bg-green-500 text-xs rounded-xl text-white hover:brightness-125"
-                                      onClick={() => dispatch(resolveIssue(x.id))}>
-                                      resolve
-                                    </button>
-                                    <button
-                                      className="btn-link px-2 bg-yellow-500 text-xs rounded-xl text-white hover:brightness-125"
-                                      onClick={() => dispatch(removeIssue(x.id))}>
-                                      remove
-                                    </button>
-                                  </div>
+                                  <>
+                                    <div className="w-60 flex gap-4 py-4">
+                                      <button
+                                        className="btn-link px-2 bg-green-500 text-xs rounded-xl text-white hover:brightness-125"
+                                        onClick={() => dispatch(resolveIssue(x.id))}>
+                                        resolve
+                                      </button>
+                                      <button
+                                        className="btn-link px-2 bg-yellow-500 text-xs rounded-xl text-white hover:brightness-125"
+                                        onClick={() => dispatch(removeIssue(x.id))}>
+                                        remove
+                                      </button>
+                                    </div>
+                                    <span className="font-light text-sm text-gray-400 italic">
+                                      Issue submitted by {x.username} <TimeAgo timestamp={x.date} />
+                                    </span>
+                                  </>
                                 ) : (
-                                  <div className="w-60 flex gap-4 py-4">
-                                    <button className="btn-link px-2 bg-green-500 text-xs rounded-xl text-white hover:brightness-125">Request Review</button>
+                                  <div className="flex flex-col gap-4">
+                                    <div className="w-60 flex py-1">
+                                      <button className="btn-link px-2 bg-green-500 text-xs rounded-xl text-white hover:brightness-125">Request Review</button>
+                                    </div>
                                   </div>
                                 )}
                               </td>
