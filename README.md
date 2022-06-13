@@ -43,6 +43,69 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+# install dependencies for the app
+
+- @Reduxjs/toolkit
+- React-Redux
+- axios
+- Date-fns(dev dependency)
+- React router dom
+- tw-elements
+- tailwindcss/postcss (dev dependency)
+
+## @Rduxjs/toolkit
+
+### 'npm i @reduxjs/toolkit`
+
+Manage app state with reduxjs/toolkit, a modern way of state management with reduxjs.
+Comes with most necessary functinalites out of the box; - Redux createStore now congigureStore which takes reducers, middlewares as object arguments - createSlice which takes names of specific actions and reducers for those actions and then create an automatic actions from the reducers of the slice and generates an automated reducer class used in the store.
+Comes with out of the box functionalites such as the redux thunk, used as createAsync thunk used for fetching data from APIs
+
+### 'npm i react-redux'
+
+A plugin used to integrate redux with react which comes with functions and hooks for use with react
+
+### `npm i axios`
+
+A javascript data fetching library used to make calls to APIs and returns an object by default.
+
+### `npm i date-fns`
+
+A devdepency used in formatting dates
+
+### `npm i react-router-dom'
+
+Simplifies navigation with the react application
+
+### `npm i tw-elements`
+
+A tailwindcss plugin for javascript animations and functions used for building great UIs and designs
+
+### `npm i -D tailwindcss postcss` && `npx init tailwindcss`
+
+Installs and publishes the tailwind css package for styling
+
+**Note: on installation, add the following lines of code to the index.css of the src folder**
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+and then add the following to the tailwindconfig.js in the src folder
+
+```js
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/tw-elements/dist/js/**/*.js"],
+  theme: { extend: {} },
+  plugins: [require("tw-elements/dist/plugin")],
+};
+```
+
+refer to the [tailwindcss with React](https://tailwindcss.com/docs/guides/create-react-app).
+to learn more about using tailwindcss with React
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
@@ -72,9 +135,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## Install redux core library
-
-### npm i redux
-
-install the latest version of redux core library to manage app state seperately from the react app

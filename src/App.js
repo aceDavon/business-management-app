@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout";
 import Welcome from "./pages/welcome";
 import { fetchUsers, getLocal, selectAllUsers } from "./features/users/usersSlice";
