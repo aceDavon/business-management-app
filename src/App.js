@@ -9,12 +9,13 @@ import { useEffect, useState } from "react";
 import IssueContainer from "./features/issues/issueContainer";
 import { selectAllIssues } from "./features/issues/issuesSlice";
 import TasksContainer from "./features/tasks/tasksContainer";
+import TasksCard from "./components/authUsers/tasksCard";
 
 function App() {
-  const { isLoggedIn, authUser, admin } = useSelector(selectAllUsers);
+  const { isLoggedIn, authUser, admin, allUsers } = useSelector(selectAllUsers);
   const { issues } = useSelector(selectAllIssues);
   const dispatch = useDispatch();
-  const local = JSON.parse(localStorage.getItem("appUser"));
+  const local = JSON.parse(localStorage.getItem("allUsers"));
   const [username, setUsername] = useState("");
   useEffect(() => {
     if (!local) {
@@ -34,6 +35,7 @@ function App() {
         </Route>
         <Route path="/tasks">
           <Route path="add" element={<TasksContainer user={[authUser, admin]} />} />
+          <Route path="view_all" element={<TasksCard admins={[admin]} users={[allUsers]} />} />
         </Route>
       </Route>
     </Routes>

@@ -12,6 +12,8 @@ const initialState = {
   error: "",
 };
 
+const localCheck = localStorage.getItem("allUsers");
+
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   try {
     const UsersData = await axios.get("https://fakestoreapi.com/users");
@@ -25,20 +27,48 @@ const UsersSlice = createSlice({
   initialState,
   reducers: {
     signIn: (state, action) => {
+      const { auth } = action.payload;
       state.status = "idle";
       state.isLoggedIn = true;
-      state.authUser = action.payload;
-    },
-    saveUser: (state, action) => {
-      const authData = JSON.stringify(action.payload);
-      localStorage.setItem("appUser", authData);
+      state.authUser = auth;
+      localStorage.setItem("appUser", JSON.stringify(auth));
       state.local = !state.local;
     },
     getLocal: (state, action) => {
-      state.authUser = action.payload;
+      state.allUsers = action.payload;
       state.status = "idle";
-      state.isLoggedIn = true;
-      state.local = true;
+    },
+    assignTask: (state, action) => {
+      const { id, taskData } = action.payload;
+      let task = [];
+      const users = state.allUsers.map((x) => (x.id === id ? { ...x, tasks: task.concat(taskData) } : x));
+      state.allUsers = users;
+      localStorage.setItem("allUsers", JSON.stringify(users));
+    },
+    addTask: (state, action) => {
+      const { id, taskData } = action.payload;
+      const users = state.allUsers.map((x) => {
+        if (x.id === id) {
+          x.tasks = x.tasks.concat(taskData);
+        }
+        return x;
+      });
+      state.allUsers = users;
+      localStorage.setItem("allUsers", JSON.stringify(users));
+    },
+    acceptTask: (state, action) => {
+      const { id } = action.payload;
+      const response = state.authUser.tasks;
+
+      response.find((x) => x.id === id);
+      response.status = "accepted";
+    },
+    declineTask: (state, action) => {
+      const { id } = action.payload;
+      const response = state.authUser.tasks;
+
+      response.find((x) => x.id === id);
+      response.status = "declined";
     },
   },
   extraReducers(builder) {
@@ -54,6 +84,7 @@ const UsersSlice = createSlice({
           return x;
         });
         state.allUsers = state.allUsers.concat(stateDate);
+        localCheck ? console.log("users found") : localStorage.setItem("allUsers", JSON.stringify(state.allUsers));
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.status = "failed";
@@ -63,6 +94,6 @@ const UsersSlice = createSlice({
 });
 
 export const selectAllUsers = (state) => state.users;
-export const { signIn, saveUser, getLocal } = UsersSlice.actions;
+export const { signIn, getLocal, assignTask, acceptTask, declineTask, addTask } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

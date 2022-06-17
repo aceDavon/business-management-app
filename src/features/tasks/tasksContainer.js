@@ -33,6 +33,7 @@ const TasksContainer = (props) => {
   };
   return (
     <div className="block p-6 mx-auto my-4 rounded-lg shadow-lg bg-white max-w-md">
+      {admin ? <CreateCategory user={username} /> : null}
       <p className="text-3xl font-bold text-center">Add tasks to the system below</p>
       <form className="my-2">
         <div className="form-group mb-6">
@@ -108,8 +109,7 @@ const TasksContainer = (props) => {
           Submit
         </button>
       </form>
-      {admin ? <CreateCategory user={username} /> : null}
-      <Link to={"../../"}>Home</Link>
+      <Link to={"../../"}>Home</Link> <Link to={"../view_all"}>All Tasks</Link>
     </div>
   );
 };

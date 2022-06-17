@@ -5,30 +5,31 @@ import { saveUser, selectAllUsers, signIn } from "./usersSlice";
 
 const Auth = () => {
   const [values, setValues] = useState({});
-  const { status, allUsers, local } = useSelector(selectAllUsers);
+  const { status, local } = useSelector(selectAllUsers);
   const [canLog, setCanLog] = useState(false);
   const dispatch = useDispatch();
   const [err, setErr] = useState(false);
   const [noUser, setNoUser] = useState(false);
 
-  useEffect(() => {
-    status === "successful" ? setCanLog(!canLog) : setCanLog(false);
-  }, [status]);
-
   const { email, psw } = values;
 
   const canSave = [email, psw].every(Boolean);
+  const regUsers = JSON.parse(localStorage.getItem("allUsers"));
 
-  const handleClick = () => {
-    const user = allUsers.find((x) => x.password === psw && x.email === email);
+  useEffect(() => {
+    status === "successful" || regUsers ? setCanLog(!canLog) : setCanLog(false);
+  }, [status]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const user = regUsers.find((x) => x.password === psw && x.email === email);
 
     if (canSave && (user || local)) {
       if (local) {
         alert("You are already logged in");
         return;
       } else if (user) {
-        dispatch(signIn(user));
-        dispatch(saveUser(user));
+        dispatch(signIn({ auth: user }));
       } else {
         setNoUser(!noUser);
       }
@@ -136,7 +137,7 @@ const Auth = () => {
       transition
       duration-150
       ease-in-out"
-          onClick={() => handleClick()}
+          onClick={(e) => handleClick(e)}
           disabled={!canLog}>
           {canLog ? "signin" : "Waiting..."}
         </button>

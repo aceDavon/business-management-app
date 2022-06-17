@@ -36,12 +36,14 @@ const tasksSlice = createSlice({
               end: isoDate,
             }),
             username,
+            status: "pending",
           },
         };
       },
     },
     completeTask: (state, action) => {
-      const completedTask = state.tasks.find((x) => x.id === action.payload);
+      const { id } = action.payload;
+      const completedTask = state.tasks.find((x) => x.id === id);
 
       completedTask.completed = !completedTask.completed;
     },
