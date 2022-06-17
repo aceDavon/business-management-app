@@ -53,15 +53,15 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 - tw-elements
 - tailwindcss/postcss (dev dependency)
 
-## @Rduxjs/toolkit
+## @Reduxjs/toolkit
 
-### 'npm i @reduxjs/toolkit`
+### `npm i @reduxjs/toolkit`
 
 Manage app state with reduxjs/toolkit, a modern way of state management with reduxjs.
 Comes with most necessary functinalites out of the box; - Redux createStore now congigureStore which takes reducers, middlewares as object arguments - createSlice which takes names of specific actions and reducers for those actions and then create an automatic actions from the reducers of the slice and generates an automated reducer class used in the store.
 Comes with out of the box functionalites such as the redux thunk, used as createAsync thunk used for fetching data from APIs.
 
-### 'npm i react-redux'
+### `npm i react-redux`
 
 A plugin used to integrate redux with react which comes with functions and hooks for use with react.
 
