@@ -19,6 +19,7 @@ const TasksCard = ({ admins }) => {
   };
 
   return (
+    // table of tasks section
     <div className="flex flex-col h-96">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8 relative">

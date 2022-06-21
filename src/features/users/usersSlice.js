@@ -40,8 +40,12 @@ const UsersSlice = createSlice({
     },
     assignTask: (state, action) => {
       const { id, taskData } = action.payload;
-      let task = [];
-      const users = state.allUsers.map((x) => (x.id === id ? { ...x, tasks: task.concat(taskData) } : x));
+      const users = state.allUsers.map((x) => {
+        if (x.id === id) {
+          x.tasks = x.tasks.concat(taskData);
+        }
+        return x;
+      });
       state.allUsers = users;
       localStorage.setItem("allUsers", JSON.stringify(users));
     },
@@ -81,6 +85,7 @@ const UsersSlice = createSlice({
         let min = 1;
         const stateDate = action.payload.map((x) => {
           x.date = sub(new Date(), { minutes: min++ }).toISOString;
+          x.tasks = [];
           return x;
         });
         state.allUsers = state.allUsers.concat(stateDate);

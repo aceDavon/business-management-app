@@ -73,7 +73,7 @@ A javascript data fetching library used to make calls to APIs and returns an obj
 
 A devdepency used in formatting dates
 
-### `npm i react-router-dom'
+### `npm i react-router-dom`
 
 Simplifies navigation with the react application
 
